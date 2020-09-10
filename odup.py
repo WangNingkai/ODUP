@@ -153,7 +153,6 @@ def upload(file, path):
     token, api_url, shared_folder = getAccessToken(shareLink)
     path = path.strip('/') + '/'
     file_size = os.path.getsize(file)
-    # print('文件大小:' + str(round(float(file_size / 1024 / 1024), 2)) + ' MB')
     (filepath, tempfilename) = os.path.split(file)
     uploadpath = (path + tempfilename).strip('/')
     click.echo(f'开始上传（{HRS(file_size)}），上传地址：{uploadpath}')
@@ -167,7 +166,6 @@ def upload(file, path):
         response = requests.put(url, headers=headers,
                                 data=f.read())
         file_id = json.loads(response.text)['id']
-        # print('提取 文件ID:' + file_id)
     else:
         # 分片上传最大15G
         headers = {
@@ -183,7 +181,6 @@ def upload(file, path):
                 data = f.read(20 * 1024 * 1024)
                 if not data:
                     file_id = json.loads(response.text)['id']
-                    # print('提取 文件ID:' + file_id)
                     bar.finish()
                     break
                 headers = {
