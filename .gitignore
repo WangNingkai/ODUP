@@ -1,0 +1,7 @@
+# Editor files and folders
+.vscode/
+.idea/
+dist/
+build/
+__pycache__/
+*.spec
